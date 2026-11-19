@@ -1,16 +1,71 @@
+import math
+
+
 def parse_order(text):
-    size, copies = text.split(':')
-    return size.strip().upper(), int(copies)
+    if not isinstance(text, str):
+        return None
+
+    parts = text.split(':')
+    if len(parts) != 2:
+        return None
+
+    size = parts[0].strip().upper()
+
+    if not size:
+        return None
+
+    try:
+        copies = int(parts[1].strip())
+    except ValueError:
+        return None
+
+    if copies <= 0:
+        return None
+
+    return size, copies
+
 
 def file_size_average(sizes_csv):
-    values = [int(r) for r in sizes_csv.split(',')]
+    if not isinstance(sizes_csv, str) or not sizes_csv.strip():
+        return None
+
+    try:
+        values = [int(value.strip()) for value in sizes_csv.split(',')]
+    except ValueError:
+        return None
+
+    if any(value < 0 for value in values):
+        return None
+
     return sum(values) // len(values)
 
-def payable_amount(text):
-    amount, discount = text.split('|')
-    total = float(amount) * 1.18 - float(discount)
-    return max(total, 0)
 
+def payable_amount(text):
+    if not isinstance(text, str):
+        return None
+
+    parts = text.split('|')
+    if len(parts) != 2:
+        return None
+
+    try:
+        amount = float(parts[0].strip())
+        discount = float(parts[1].strip())
+    except (ValueError, OverflowError):
+        return None
+
+    if not math.isfinite(amount) or not math.isfinite(discount):
+        return None
+
+    if amount < 0 or discount < 0:
+        return None
+
+    total = amount * 1.18 - discount
+
+    if not math.isfinite(total):
+        return None
+
+    return max(total, 0.0)
 def main():
     print("==== Running parse_order ====")
     user_input = input("Enter print size:copies (e.g. 4x6:25): ")
