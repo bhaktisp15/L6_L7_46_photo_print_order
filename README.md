@@ -173,6 +173,10 @@ continued to produce the expected results. Passing fuzz tests demonstrate
 that the generated inputs caused no crashes during the run; they do not
 prove correctness for every possible input.
 
+<img width="940" height="220" alt="image" src="https://github.com/user-attachments/assets/16500bf7-4dc9-4080-84bd-c879e821936a" />
+<img width="940" height="233" alt="image" src="https://github.com/user-attachments/assets/4ce17784-9e95-42bb-b5f0-272b7728d7b3" />
+<img width="940" height="381" alt="image" src="https://github.com/user-attachments/assets/8fafda92-2df8-4fc8-9622-33da18eb5216" />
+
 ## Repository
 
 **GitHub:** [L6_L7_46_photo_print_order](https://github.com/bhaktisp15/L6_L7_46_photo_print_order)
